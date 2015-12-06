@@ -45,7 +45,7 @@ h3{
     <textarea id="stdin">
         hello
     </textarea>
-    
+
 
 
     <input type="button" value="Compile" id="send">
@@ -59,7 +59,7 @@ h3{
     <p id="testsoutput" class="output">Output of all tests appear here<br><br>
     </p>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
     <script type="text/javascript">
 
@@ -69,7 +69,7 @@ h3{
     	var langs = [];
     	for (var i in LANGS)
     	{
-    		msg += LANGS[i][0] + ": " + i +"\n";	
+    		msg += LANGS[i][0] + ": " + i +"\n";
     	}
 
     	alert(msg);
@@ -81,7 +81,7 @@ h3{
         var langid = $('#langid').val();
         var codeF = $('#code').val();
         var stdin = $('#stdin').val();
-// passing the json file to the page 
+// passing the json file to the page
         var json = {
             language: langid,
             code: codeF,
@@ -90,8 +90,7 @@ h3{
         console.log(json);
 
         $.post("/compile", json, function(data, error, xhr) {
-
-            document.getElementById("output").innerHTML = data.output;
+            $("#output").text(data.output);
         });
     });
 

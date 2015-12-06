@@ -1,11 +1,22 @@
 #!/bin/bash
+
 set -e
 
 to=$1
 shift
 
+os=$(uname -a | cut -d " " -f 1)
+
+# if linux, using timeout, if Mac, use gtimeout (use `brew install coreutils` to install gtimeout)
+if [ $os = 'Darwin' ]
+then
+    timeout="gtimeout"
+else
+    timeout="timeout"
+fi
+
 cont=$(docker run -d "$@")
-code=$(timeout "$to" docker wait "$cont" || true)
+code=$("$timeout" "$to" docker wait "$cont" || true)
 docker kill $cont &> /dev/null
 echo -n 'status: '
 if [ -z "$code" ]; then

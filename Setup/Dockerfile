@@ -3,14 +3,14 @@
 # Based on Ubuntu
 ############################################################
 
-FROM chug/ubuntu14.04x64 
-MAINTAINER ASAD MEMON, OSMAN ALI
+FROM ubuntu:trusty
 
 # Update the repository sources list
-RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/sources.list
+#RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/sources.list
 RUN apt-get update
 #RUN apt-get upgrade
 #Install all the languages/compilers we are supporting.
+RUN apt-get install -y build-essential
 RUN apt-get install -y gcc
 RUN apt-get install -y g++
 RUN apt-get install -y php5-cli
@@ -44,11 +44,7 @@ RUN apt-get install -y gnustep-devel &&  sed -i 's/#define BASE_NATIVE_OBJC_EXCE
 
 
 RUN apt-get install -y scala
-RUN apt-get install -y mysql-server
 RUN apt-get install -y perl
 
 RUN apt-get install -y sudo
 RUN apt-get install -y bc
-
-RUN echo "mysql ALL = NOPASSWD: /usr/sbin/service mysql start" | cat >> /etc/sudoers
-
